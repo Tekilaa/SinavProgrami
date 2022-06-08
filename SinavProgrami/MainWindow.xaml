@@ -1,0 +1,115 @@
+﻿<Window x:Class="SinavProgrami.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SinavProgrami"
+        mc:Ignorable="d"
+        Title="Takvim" Height="655" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Background="#FF6ECB88">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="4" Margin="125,422,125,0" Grid.RowSpan="2">
+            <!-- EKLEME KISMI -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="EklemeTextBox" Margin="160,32,160,0" VerticalAlignment="Top" Height="32" Grid.RowSpan="2" FontSize="18" Text="{Binding InputScope, ElementName=label}"/>
+            <Label x:Name="label" Content="Ekleme Yap" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="22" Height="35" Margin="0,-3,0,0"/>
+            <Button Content="EKLE" Margin="595,32,115,0" Click="Ekle"/>
+            <Button Content="SIL"  Margin="115,32,595,0" Click="TextBox_Sil"/>
+            <RadioButton Content="Bölüm" x:Name="radioBolum" HorizontalAlignment="Left" Margin="200,0,0,0" Grid.Row="1" VerticalAlignment="Center" IsChecked="True"/>
+            <RadioButton Content="Ders" x:Name="radioDers" HorizontalAlignment="Left" Margin="300,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
+            <RadioButton Content="Sınıf" x:Name="radioSinif" HorizontalAlignment="Left" Margin="400,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
+            <RadioButton Content="Öğr. Grv" x:Name="radioGorevli" HorizontalAlignment="Left" Margin="500,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
+
+        </Grid>
+
+        <Grid Grid.Column="3" Margin="125,422,0,0" Grid.RowSpan="2" Grid.Row="1">
+            <Button Content="İLERİ" HorizontalAlignment="Center" Margin="0,35,0,0" VerticalAlignment="Center" FontSize="18" Click="Button_Click"/>
+            <!-- ILERI TUSU -->
+        </Grid>
+        <Grid Margin="0,421,125,0" Grid.RowSpan="2" Grid.Row="1">
+            <!-- GERI TUSU -->
+        </Grid>
+
+        <Border Grid.Column="1" Grid.RowSpan="2" BorderBrush="Black" 
+        BorderThickness="1,0,0,0" Background="{x:Null}" />
+        <Border Grid.Column="2" Grid.RowSpan="2" BorderBrush="Black" 
+        BorderThickness="1,0,0,0" Background="{x:Null}" />
+        <Border Grid.Column="3" Grid.RowSpan="2" BorderBrush="Black" 
+        BorderThickness="1,0,0,0" Background="{x:Null}" />
+        <Border Grid.Row ="0" Grid.ColumnSpan="4" BorderBrush="Black" 
+        BorderThickness="0,0,0,1" Background="{x:Null}" />
+        <Border Grid.Row ="1" Grid.ColumnSpan="4" BorderBrush="Black" 
+        BorderThickness="0,0,0,1" Background="{x:Null}" />
+
+        <Label Content="Bölümler" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26"/>
+        <Label Content="Dersler" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26" Grid.Column="1"/>
+        <Label Content="Sınıflar" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26" Grid.Column="2"/>
+        <Label Content="Öğr. Görevlileri" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26" Grid.Column="3"/>
+
+        <!-- DATA -->
+        <DataGrid Grid.Row="1" Grid.Column="0" Margin="10,10,10,6" x:Name="bolumler">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Sil" Click="DataSil"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="BÖLÜM ADI" Binding="{Binding NAME}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Grid.Row="1" Grid.Column="1" Margin="10,10,10,6" x:Name="dersler" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Sil" Click="DataSil"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="DERS ADI" Binding="{Binding NAME}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Grid.Row="1" Grid.Column="2" Margin="10,10,10,6" x:Name="siniflar" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Sil" Click="DataSil"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="SINIF" Binding="{Binding NAME}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Grid.Row="1" Grid.Column="3" Margin="10,10,10,6" x:Name="gorevliler" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Sil" Click="DataSil"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="GÖREVLİ ADI" Binding="{Binding NAME}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+    </Grid>
+</Window>
